@@ -34,6 +34,7 @@ RUN pip install --no-cache-dir networkx scipy \
     babypandas
 
 # 4) change back to notebook user
+USER root
 COPY /run_jupyter.sh /
 RUN chmod 755 /run_jupyter.sh
 
