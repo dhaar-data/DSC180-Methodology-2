@@ -2,7 +2,7 @@
 # generally use the most recent tag
 
 # base notebook, contains Jupyter and relevant tools
-ARG BASE_CONTAINER=ucsdets/datahub-base-notebook:2021.3-42158c8
+ARG BASE_CONTAINER=ucsdets/datascience-notebook:2021.2-stable
 
 # data science notebook
 # https://hub.docker.com/repository/docker/ucsdets/datascience-notebook/tags
@@ -19,14 +19,19 @@ LABEL maintainer="UC San Diego ITS/ETS <ets-consult@ucsd.edu>"
 # 2) change to root to install packages
 USER root
 
-RUN apt-get -y install htop
+RUN apt-get -y install htop && \
+    apt-get install aria2 && \
+    apt-get install nmap && \
+    apt-get install traceroute
 
 # 3) install packages
 USER jovyan
 
 # RUN conda install -y scikit-learn
 
-RUN pip install --no-cache-dir networkx scipy
+RUN pip install --no-cache-dir networkx scipy && \
+    pip install geopandas && \
+    pip install babypandas
 
 # 4) change back to notebook user
 COPY /run_jupyter.sh /
