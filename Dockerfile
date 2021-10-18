@@ -19,19 +19,19 @@ LABEL maintainer="UC San Diego ITS/ETS <ets-consult@ucsd.edu>"
 # 2) change to root to install packages
 USER root
 
-RUN apt-get -y install htop && \
-    apt-get install aria2 && \
-    apt-get install nmap && \
-    apt-get install traceroute
+RUN apt-get -y install htop \
+    aria2 \
+    nmap \
+    traceroute
 
 # 3) install packages
 USER jovyan
 
 # RUN conda install -y scikit-learn
 
-RUN pip install --no-cache-dir networkx scipy && \
-    pip install geopandas && \
-    pip install babypandas
+RUN pip install --no-cache-dir networkx scipy \
+    geopandas \
+    babypandas
 
 # 4) change back to notebook user
 COPY /run_jupyter.sh /
